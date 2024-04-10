@@ -1,0 +1,1 @@
+ffmpeg -i "data/mpi_inf_3dhp/S1/Seq1/ChairMasks/video_0.avi" -qscale:v 1 "data/mpi_inf_3dhp/S1/Seq1/ChairMasks/frames/img_0_%%06d.jpg"
