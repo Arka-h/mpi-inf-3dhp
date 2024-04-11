@@ -2,19 +2,19 @@ import scipy.io
 import numpy as np
 import torch
 
-def convert(rel_path):
+def convert(path):
     """
     Converts annotation data from a .mat file to a .pt file using PyTorch.
 
     Args:
-        rel_path (str): The relative path to the directory containing the .mat file.
+        path (str): The path to the directory containing the .mat file.
 
     Returns:
         None
     """
     
     # Seq1 : Decoded 6417 frames
-    mat_file = f'{rel_path}/annot.mat'
+    mat_file = f'{path}/annot.mat'
     mat = scipy.io.loadmat(mat_file)
     mat = {k:v for k, v in mat.items() if k[0] != '_'}
     # ['annot2', 'annot3', 'cameras', 'frames', 'univ_annot3']
@@ -36,11 +36,12 @@ def convert(rel_path):
     # frames # (6416,1)
     mat['frames'] = mat['frames'].squeeze()
 
-    torch.save(mat, f'{rel_path}/annot.pt')
+    torch.save(mat, f'{path}/annot.pt')
     print("SUMMARY\n", { key: mat[key].shape for key in 
         ['annot2', 'annot3', 'cameras', 'frames', 'univ_annot3'] })
 
 if __name__ == '__main__':
+    split='subset'
     S = 'S'+input('enter subj id:')
     Seq = 'Seq'+input('enter Seq:')
-    convert(f'../{S}/{Seq}')
+    convert(f'../{split}/{S}/{Seq}')

@@ -3,7 +3,7 @@
 # path to download the complete training set.
 # The test set needs another 7GB and can be
 # downloaded with get_testset.sh
-destination="./"
+destination="./subset"
 # The subjects you want to download the train data for.
 # Start with a few if all you want to do is examine the data
 subjects=(1 2)

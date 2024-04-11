@@ -1,18 +1,18 @@
 import os
 import argparse
-def get_frames(base_dir, args):
+import os
+
+def get_frames(base_dir, idx):
     """
-    Creates frames from video files in specified directories using ffmpeg.
+    Generate frames from video files in the specified directory.
 
     Args:
         base_dir (str): The base directory containing the video files.
-        args (list): List of arguments, including the index for frame extraction.
+        idx (int): The index of camera no./vdo file to generate frames from.
 
     Returns:
         None
     """
-    print(args)
-    idx=args.index
     for S in os.listdir(base_dir):
         if S.startswith('S'):
             for seq in os.listdir(f'{base_dir}/{S}'):
@@ -23,8 +23,7 @@ def get_frames(base_dir, args):
                     
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--index', type=int, default=0)
-    args = parser.parse_args()
-    base_dir = '/home/sampath/arka/gen-ai/sd-dino/data/mpi_inf_3dhp'
-    get_frames(base_dir, args)
+    split='subset'
+    base_dir = f'/home/sampath/arka/gen-ai/sd-dino/data/mpi_inf_3dhp/{split}'
+    idx=int(input('Enter index: '))
+    get_frames(base_dir, idx)
